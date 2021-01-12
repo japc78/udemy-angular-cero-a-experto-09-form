@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomValidationsService } from '../../services/custom-validations.service';
 
 @Component({
   selector: 'app-reactive',
@@ -20,10 +21,11 @@ export class ReactiveComponent implements OnInit {
     Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private customValidations: CustomValidationsService) {
     this.createForm();
     this.setForm();
-
   }
 
   ngOnInit(): void {
@@ -60,7 +62,7 @@ export class ReactiveComponent implements OnInit {
       // name: ['', , ],
 
       name     : ['', this.validationBasic],
-      lastName : ['', this.validationBasic],
+      lastName : ['', [Validators.required, this.customValidations.noSurname]],
       email    : ['', this.validationEmail],
       address  : this.fb.group({
         street : ['', this.validationBasic],
