@@ -14,7 +14,9 @@ export class TemplateComponent implements OnInit {
     name: 'Juan Antonio',
     lastName: 'Pavón Carmona',
     email: 'japc.testing@gmail.com',
-    country: ''
+    country: 'ESP',
+
+
   };
 
   // user = {
