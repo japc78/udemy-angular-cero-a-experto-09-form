@@ -1,6 +1,6 @@
 <h4>Reactive Forms</h4>
 <hr>
-<form autocomplete="off">
+<form autocomplete="off" [formGroup]="formValue" (ngSubmit)="saveForm()">
 
   <div>
 
@@ -10,7 +10,10 @@
 
         <input class="form-control"
                type="text"
-               placeholder="Nombre">
+               placeholder="Nombre"
+
+               formControlName="name"
+               >
       </div>
     </div>
 
@@ -20,7 +23,10 @@
 
         <input class="form-control"
                type="text"
-               placeholder="Apellido">
+               placeholder="Apellido"
+
+               formControlName="lastName"
+               >
       </div>
     </div>
 
@@ -32,7 +38,9 @@
 
       <input class="form-control"
              type="email"
-             placeholder="Correo electrónico">
+             placeholder="Correo electrónico"
+             formControlName="email"
+             >
     </div>
   </div>
 

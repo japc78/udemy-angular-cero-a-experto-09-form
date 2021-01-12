@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReactiveComponent implements OnInit {
 
-  constructor() { }
+  formValue: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+
+  }
 
   ngOnInit(): void {
   }
 
+  createForm(): void {
+    this.formValue = this.fb.group({
+      // Definicion de un form control
+      // 1. Argumento. Valor por defecto
+      // 2. Argumento. Validadores sincronos
+      // 3. Argumento. Validadores asincronos
+      // name: ['', , ],
+
+      name     : ['Juan Antonio'],
+      lastName : ['Pavon'],
+      email    : ['japc.testing@gmail.com']
+    });
+  }
+
+  saveForm(): void {
+    console.log(this.formValue);
+
+  }
 }
