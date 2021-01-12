@@ -50,7 +50,11 @@ export class ReactiveComponent implements OnInit {
 
       name     : ['', validationBasic],
       lastName : ['', validationBasic],
-      email    : ['', validationEmail]
+      email    : ['', validationEmail],
+      address  : this.fb.group({
+        street : ['', validationBasic],
+        city : ['', validationBasic],
+      }),
     });
   }
 
