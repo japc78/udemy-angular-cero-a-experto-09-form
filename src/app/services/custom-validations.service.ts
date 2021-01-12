@@ -9,7 +9,7 @@ export class CustomValidationsService {
   constructor() { }
 
   noSurname( control: FormControl): {[s: string]: boolean} {
-    console.log(control.value.toLowerCase());
+    // console.log(control.value.toLowerCase());
     console.log(control);
 
 

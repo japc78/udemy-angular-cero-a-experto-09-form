@@ -11,12 +11,12 @@ export class ReactiveComponent implements OnInit {
 
   formValues: FormGroup;
 
-  private validationBasic: Validators = [
+  readonly validationBasic: Validators = [
     Validators.required,
     Validators.minLength(5)
   ];
 
-  private validationEmail: Validators = [
+  readonly validationEmail: Validators = [
     Validators.required,
     Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
   ];
@@ -36,10 +36,10 @@ export class ReactiveComponent implements OnInit {
     return this.formValues.get('name').invalid && this.formValues.get('name').touched;
   }
   get lastNameInvalid(): boolean {
-    return this.formValues.get('name').invalid && this.formValues.get('name').touched;
+    return this.formValues.get('lastName').invalid && this.formValues.get('lastName').touched;
   }
   get emailInvalid(): boolean {
-    return this.formValues.get('name').invalid && this.formValues.get('name').touched;
+    return this.formValues.get('email').invalid && this.formValues.get('email').touched;
   }
   get streetInvalid(): boolean {
     return this.formValues.get('address.street').invalid && this.formValues.get('address.street').touched;
@@ -98,13 +98,17 @@ export class ReactiveComponent implements OnInit {
     console.log(this.formValues);
 
     if (this.formValues.invalid) {
-      Object.values( this.formValues.controls).forEach( control => {
-        control.markAllAsTouched();
-        console.log(control);
+      return Object.values( this.formValues.controls).forEach( control => {
+        if (control instanceof FormGroup) {
+          Object.values( control.controls).forEach( item => item.markAsTouched());
+        } else {
+          control.markAsTouched();
+        }
+        // console.log(control);
       });
     }
     console.log(this.formValues.value);
-    //Una vez enviado el formulario se realiza el reset para borrar el formulario
+    // Una vez enviado el formulario se realiza el reset para borrar el formulario
     this.formValues.reset();
   }
 
