@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -12,6 +12,7 @@ export class ReactiveComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.createForm();
+    this.setForm();
 
   }
 
@@ -34,7 +35,10 @@ export class ReactiveComponent implements OnInit {
   get cityInvalid(): boolean {
     return this.formValues.get('address.city').invalid && this.formValues.get('address.city').touched;
   }
-city
+  get hobbies(): FormArray {
+    console.log(this.formValues.get('hobbies'));
+    return this.formValues.get('hobbies') as FormArray;
+  }
   createForm(): void {
 
     const validationBasic: Validators[] = [
@@ -61,6 +65,29 @@ city
         street : ['', validationBasic],
         city : ['', validationBasic],
       }),
+
+      hobbies: this.fb.array([
+        [], [], [], [], [],
+      ])
+    });
+  }
+
+  setForm(): void {
+    // Set Value es oblitarorio pasarle todos los campos del objeto, aunque esten vacios.
+    // this.formValues.setValue({
+    //   name: 'Juan Antonio',
+    //   lastName: 'Pavon Carmona',
+    //   email: 'japc.testing@gmail.com',
+    //   address: {
+    //     street: 'Pedreras 55',
+    //     city: 'La Linea'
+    //   }
+    // });
+
+    // Reset borrar los elementos del formulario pero se le puede pasar valores por defecto.
+    this.formValues.reset({
+      name: 'Juan Antonio',
+      email: 'japc.testing@gmail.com',
     });
   }
 
@@ -74,5 +101,10 @@ city
       });
     }
 
+    console.log(this.formValues.value);
+
+
+    //Una vez enviado el formulario se realiza el reset para borrar el formulario
+    this.formValues.reset();
   }
 }
