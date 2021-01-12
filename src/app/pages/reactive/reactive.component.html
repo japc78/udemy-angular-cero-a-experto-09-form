@@ -13,10 +13,10 @@
                placeholder="Nombre"
 
                formControlName="name"
-               [class.is-invalid] = "nameInValid"
+               [class.is-invalid] = "nameInvalid"
                >
                <small
-               *ngIf="nameInValid"
+               *ngIf="nameInvalid"
                class="form-text text-danger">Minimum 5 characters</small>
       </div>
     </div>
@@ -29,11 +29,11 @@
                 type="text"
                 placeholder="Apellido"
 
-               [class.is-invalid] = "lastNameInValid"
+               [class.is-invalid] = "lastNameInvalid"
                formControlName="lastName"
                >
                <small
-               *ngIf="nameInValid"
+               *ngIf="nameInvalid"
                class="form-text text-danger">Minimum 5 characters</small>
               </div>
             </div>
@@ -49,10 +49,10 @@
              type="email"
              placeholder="Correo electrónico"
              formControlName="email"
-             [class.is-invalid] = "emailInValid"
+             [class.is-invalid] = "emailInvalid"
              >
       <small
-      *ngIf="nameInValid"
+      *ngIf="nameInvalid"
       class="form-text text-danger">Minimum 5 characters</small>
     </div>
   </div>
@@ -66,6 +66,7 @@
           type="text"
           placeholder="Dirección"
           formControlName="street"
+          [class.is-invalid] = "streetInvalid"
         >
       </div>
       <div class="col">
@@ -74,6 +75,7 @@
           type="text"
           placeholder="Ciudad"
           formControlName="city"
+          [class.is-invalid] = "cityInvalid"
         >
       </div>
 

@@ -19,16 +19,22 @@ export class ReactiveComponent implements OnInit {
   }
 
   //get es un gettet
-  get nameInValid(): boolean {
+  get nameInvalid(): boolean {
     return this.formValues.get('name').invalid && this.formValues.get('name').touched;
   }
-  get lastNameInValid(): boolean {
+  get lastNameInvalid(): boolean {
     return this.formValues.get('name').invalid && this.formValues.get('name').touched;
   }
-  get emailInValid(): boolean {
+  get emailInvalid(): boolean {
     return this.formValues.get('name').invalid && this.formValues.get('name').touched;
   }
-
+  get streetInvalid(): boolean {
+    return this.formValues.get('address.street').invalid && this.formValues.get('address.street').touched;
+  }
+  get cityInvalid(): boolean {
+    return this.formValues.get('address.city').invalid && this.formValues.get('address.city').touched;
+  }
+city
   createForm(): void {
 
     const validationBasic: Validators[] = [
@@ -62,8 +68,9 @@ export class ReactiveComponent implements OnInit {
     console.log(this.formValues);
 
     if (this.formValues.invalid) {
-      return Object.values( this.formValues.controls).forEach( control => {
+      Object.values( this.formValues.controls).forEach( control => {
         control.markAllAsTouched();
+        console.log(control);
       });
     }
 
