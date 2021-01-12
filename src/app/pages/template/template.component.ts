@@ -8,11 +8,18 @@ import { NgForm } from '@angular/forms';
 })
 export class TemplateComponent implements OnInit {
 
+  // user = {
+  //   name: 'Juan Antonio',
+  //   lastName: 'Pavón Carmona',
+  //   email: 'japc.testing@gmail.com'
+  // };
+
   user = {
-    name: 'Juan Antonio',
-    lastName: 'Pavón Carmona',
-    email: 'japc.testing@gmail.com'
+    name: '',
+    lastName: '',
+    email: ''
   };
+
 
   constructor() { }
 
@@ -22,5 +29,15 @@ export class TemplateComponent implements OnInit {
   saveForm(formValues: NgForm): void {
     console.log(formValues);
     console.log(formValues.value);
+
+    // En el caso que el formulario este vacío y los campos estee vacíos,
+    // se marcan como touched (modificados) para que se muestre el mensaje
+    // de error y se valide cada campo.
+    if (formValues.invalid) {
+      Object.values( formValues.controls).forEach( control => {
+        control.markAllAsTouched();
+      });
+      return;
+    }
   }
 }
