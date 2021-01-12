@@ -10,25 +10,33 @@ import { CountryService } from '../../services/country.service';
 })
 export class TemplateComponent implements OnInit {
 
-  // user = {
-  //   name: 'Juan Antonio',
-  //   lastName: 'Pavón Carmona',
-  //   email: 'japc.testing@gmail.com'
-  // };
-
   user = {
-    name: '',
-    lastName: '',
-    email: ''
+    name: 'Juan Antonio',
+    lastName: 'Pavón Carmona',
+    email: 'japc.testing@gmail.com',
+    country: ''
   };
 
+  // user = {
+  //   name: '',
+  //   lastName: '',
+  //   email: ''
+  // };
 
-  constructor(private countries: CountryService) { }
+  countries: any[] = [];
+
+  constructor(private countryService: CountryService) { }
 
   ngOnInit(): void {
-    this.countries.getCountries()
+    this.countryService.getCountries()
       .subscribe( items => {
-        console.log(items);
+        // console.log(items);
+        this.countries = items;
+
+        this.countries.unshift({
+          name: 'Select country',
+          code: ''
+        });
       });
   }
 
